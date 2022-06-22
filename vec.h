@@ -35,9 +35,12 @@ template <class T> class Vec
 
 		T operator[] ( std::size_t );
 
+		T* begin() { return first; };
+		T* end() { return last; };
 		std::ptrdiff_t size() const { return first ? last - first : 0; };
 
 		void swap( Vec& );
+		void emplace(T*, T);
 		void erase() { destroy(); }
 		void push_back( T );
 		void pop_back();
@@ -112,6 +115,17 @@ template<class T> void Vec<T>::swap( Vec& v )
 		std::uninitialized_copy(v.first, v.last, this->first);
 		std::uninitialized_copy(this->first, this->last, v.first);
 			
+	}
+}
+
+template<class T> void Vec<T>::emplace(T *p, T val)
+{
+	T current = *p;
+
+	if( p != this->last )
+	{
+		alloc.construct(p, val);
+		alloc.construct(++p, current);
 	}
 }
 
