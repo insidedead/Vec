@@ -44,6 +44,7 @@ template <class T> class Vec
 		void erase() { destroy(); }
 		void push_back( T );
 		void pop_back();
+		void assign(T*, T*);
 		std::size_t find( T );
 };
 
@@ -154,6 +155,16 @@ template<class T> std::size_t Vec<T>::find( T val )
 {
 	T* index = std::find_if(this->first, this->track, [=] (T v) { return v == val; });
 	return index - this->first;	
+}
+
+template<class T> void Vec<T>::assign( T *f, T *l )
+{
+	if(this->last - this->track < l - f)
+	{
+		grow(this->size + (l - f));
+	}
+
+	this->track = std::uninitialized_copy(f, l, this->track);
 }
 
 template<class T> T Vec<T>::operator[]( std::size_t index )
