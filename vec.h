@@ -106,9 +106,8 @@ template<class T> void Vec<T>::swap( Vec& v )
 {
 	if(this != &v)
 	{
-		this->size() < v.size() || this->size() != v.size() ? 
-		       	this->grow(v.size(), false) :
-			v.grow(this->size(), false);
+		if( this->size() < v.size()) this->grow(v.size(), false);
+		if( this->size() > v.size()) v.grow(this->size(), false);
 
 		std::uninitialized_copy(v.first, v.last, this->first);
 		std::uninitialized_copy(this->first, this->last, v.first);
