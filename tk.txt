@@ -1,0 +1,18 @@
+explicit
+virtual
+[[attribute]]
+noexcept
+constexpr
+"
+static -> When we declare a member of a class as static it means no matter how many objects of the class are created, there is only one copy of the static member.
+extern
+
+global - non accessable
+extern - accessable
+const - non accessable
+non-const - accessbale
+"
+enum
+union
+inline
+override
