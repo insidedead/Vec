@@ -16,3 +16,4 @@ enum
 union
 inline
 override
+volatile
